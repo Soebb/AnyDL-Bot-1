@@ -102,8 +102,7 @@ async def about(client, message):
 # Reply with inline keyboard
 @Jebot.on_message(filters.private
                    & filters.text
-                   & ~filters.edited
-                   & filters.regex(YTDL_REGEX))
+                   & ~filters.edited)
 async def ytdl_with_button(c: Client, message: Message):
     if Config.UPDATES_CHANNEL is not None:
         try:
