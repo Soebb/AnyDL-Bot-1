@@ -24,6 +24,16 @@ YTDL_REGEX = (r"^((?:https?:)?\/\/)"
 s2tw = OpenCC('s2tw.json').convert
 
 
+@Jebot.on_message(filters.private)
+async def le(client, message):
+    urll = message.text
+    archive_url = f"https://9xbud.com/{urll}"
+    r = requests.get(archive_url)   
+    soup = BeautifulSoup(r.content,'html5lib')  
+    links = soup.findAll('a')  
+    video_links = [archive_url + link['href'] for link in links if link['href'].endswith('mp4')]
+    await message.reply(f"{video_links}")
+
 @Jebot.on_message(filters.command("start"))
 async def start(client, message):
     if message.chat.type == 'private':
